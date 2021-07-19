@@ -11,9 +11,9 @@ export default class TypeOrmConfig {
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       host: configService.get<string>('DB_HOST'),
-      synchronize: configService.get<boolean>('DB_SYNCHRONIZE') || false,
-      logging: configService.get<LoggerOptions>('DB_LOGGING') || false,
+      synchronize: false,
       migrationsRun: false,
+      logging: configService.get<LoggerOptions>('DB_LOGGING') || false,
       entities: ["dist/**/*.entity{.ts,.js}"],
       migrations: ["dist/migrations/**/*{.ts,.js}"],
       cli: { "migrationsDir": "migrations" }
