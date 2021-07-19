@@ -17,11 +17,11 @@ const createDatabase = (envPath: string): void => {
     }
 
     const dropdb =
-      `PGPASSWORD=${process.env.TYPEORM_PASSWORD} dropdb ` +
-      `-h ${process.env.TYPEORM_HOST} ` +
-      `-p ${process.env.TYPEORM_PORT} ` +
-      `-U ${process.env.TYPEORM_USERNAME} ` +
-      process.env.TYPEORM_DATABASE;
+      `PGPASSWORD=${process.env.PG_PASS} dropdb ` +
+      `-h ${process.env.PG_HOST} ` +
+      `-p ${process.env.PG_PORT} ` +
+      `-U ${process.env.PG_USER} ` +
+      process.env.PG_DB;
 
     exec(dropdb, (err, stdout, stderr) => {
       if (err) {
@@ -29,7 +29,7 @@ const createDatabase = (envPath: string): void => {
         return;
       }
 
-      console.log(`Dropped database ${process.env.TYPEORM_DATABASE}`);
+      console.log(`Dropped database ${process.env.PG_DB}`);
     });
   });
 };
