@@ -9,17 +9,19 @@ export default class TypeOrmConfig {
   static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions {
     return {
       type: 'postgres',
-      database: configService.get<string>('DB_NAME'),
-      port: +configService.get<number>('DB_PORT') || 5432,
-      username: configService.get<string>('DB_USERNAME'),
-      password: configService.get<string>('DB_PASSWORD'),
-      host: configService.get<string>('DB_HOST'),
+      database: configService.get<string>('TYPEORM_DATABASE'),
+      port: +configService.get<number>('TYPEORM_PORT') || 5432,
+      username: configService.get<string>('TYPEORM_USERNAME'),
+      password: configService.get<string>('TYPEORM_PASSWORD'),
+      host: configService.get<string>('TYPEORM_HOST'),
       synchronize: false,
       migrationsRun: false,
-      logging: configService.get<LoggerOptions>('DB_LOGGING') || 'all',
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      migrations: ['dist/migrations/**/*{.ts,.js}'],
-      cli: { migrationsDir: 'migrations' },
+      logging: configService.get<LoggerOptions>('TYPEORM_LOGGING') || 'all',
+      entities: [configService.get<string>('TYPEORM_ENTITIES')],
+      migrations: [configService.get<string>('TYPEORM_MIGRATIONS')],
+      cli: {
+        migrationsDir: configService.get<string>('TYPEORM_MIGRATIONS_DIR'),
+      },
     };
   }
 }
